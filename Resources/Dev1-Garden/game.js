@@ -58,8 +58,7 @@ var FLOWER = {
 	// Used to animate the stems
 	tick : function() 
 	{
-		if (FLOWER.isGrowing && FLOWER.stemX > 0 && FLOWER.stemX < FLOWER.GRID_WIDTH - 1
-			&& FLOWER.stemY > 1)
+		if (FLOWER.isGrowing)
 		{
 			if (FLOWER.y >= FLOWER.stemY) 
 			{
@@ -164,7 +163,8 @@ PS.init = function(system, options) {
 
 	// initialize audio
 	PS.audioLoad("fx_squirp", {lock : true});
-	PS.audioLoad("fx_tweet", { lock : true });
+	PS.audioLoad("fx_tweet", {lock : true});
+	PS.audioLoad("fx_click", {lock : true});
 
 	PS.timerStart(FLOWER.FRAME_RATE, FLOWER.tick);
 };
@@ -180,10 +180,14 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 PS.touch = function(x, y, data, options) {
 	// on click
-	PS.audioPlay("fx_squirp");
-	FLOWER.isGrowing = true;
-	FLOWER.stemX = x;
-	FLOWER.stemY = y;
-	FLOWER.x = FLOWER.stemX;
-	FLOWER.y = FLOWER.BOTTOM_ROW;
+	if (x > 0 && x < FLOWER.GRID_WIDTH - 1 && y > 1 && y < FLOWER.GRID_HEIGHT - 1) {
+		PS.audioPlay("fx_squirp");
+		FLOWER.isGrowing = true;
+		FLOWER.stemX = x;
+		FLOWER.stemY = y;
+		FLOWER.x = FLOWER.stemX;
+		FLOWER.y = FLOWER.BOTTOM_ROW;
+	}
+	else
+		PS.audioPlay("fx_click");
 };

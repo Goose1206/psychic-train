@@ -148,13 +148,13 @@ function loadLevel(levelID) {
             break;
         default:
             currBlocks.push(
-                new block("Y", null),
-                new block("O", null),
-                new block("U", null),
-                new block("•", null),
-                new block("W", null),
-                new block("I", null), 
-                new block("N", null));
+                new block("Y", "xylo_c5"),
+                new block("O", "xylo_d5"),
+                new block("U", "xylo_e5"),
+                new block("•", "xylo_f5"),
+                new block("W", "xylo_g5"),
+                new block("I", "xylo_a5"), 
+                new block("N", "xylo_b5"));
             break;
     }
 
@@ -164,7 +164,7 @@ function loadLevel(levelID) {
     // shuffle blocks
     if (currentLevel === 1)
         currBlocks.reverse(); // make sure the first level isn't in order
-    else if (currentLevel === 5) {}
+    else if (currentLevel >= 5) {}
     else
         currBlocks.sort(() => Math.random() - 0.5);
 

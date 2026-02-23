@@ -82,7 +82,6 @@ function Update() {
 	// update bg
 	PS.spriteMove(BGsprite, 0, 14 + skyCount);
 	// update foreground
-	PS.spriteMove(FGsprite, 0, HEIGHT - 1);
 	// update text
 	PS.statusText(dialogue[skyCount]);
 	if (audio[skyCount] != "") {
@@ -99,6 +98,7 @@ function InitBG() {
 		BGsprite = PS.spriteImage( image );
 		PS.spriteAxis(BGsprite, 0, 96);
 		PS.spriteMove(BGsprite, 0, 14);
+		PS.spritePlane(BGsprite, 0);
 	};
 
 	PS.imageLoad("Sunset.bmp", onImageLoad);
@@ -112,6 +112,7 @@ function InitFG() {
 		FGsprite = PS.spriteImage( image );
 		PS.spriteAxis(FGsprite, 0, 25);
 		PS.spriteMove(FGsprite, 0, HEIGHT - 1);
+		PS.spritePlane(FGsprite, 1);
 	};
 
 	PS.imageLoad("Fg.PNG", onImageLoad);

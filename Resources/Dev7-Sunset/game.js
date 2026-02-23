@@ -52,7 +52,7 @@ var BGsprite, FGsprite;
 PS.init = function(system, options) {
 	// set size of grid
 	PS.gridSize(HEIGHT, WIDTH);
-	PS.debug("version 2\n");
+	PS.debug("version 3\n");
 
 	// no borders
 	PS.border(PS.ALL, PS.ALL, 0);
@@ -82,6 +82,7 @@ function Update() {
 	// update bg
 	PS.spriteMove(BGsprite, 0, 14 + skyCount);
 	// update foreground
+	PS.spriteMove(FGsprite, 0, HEIGHT - 1);
 	// update text
 	PS.statusText(dialogue[skyCount]);
 	if (audio[skyCount] != "") {
@@ -118,21 +119,25 @@ function InitFG() {
 
 function InitText() {
 	// fill dialogue array
-	PS.fileLoad("dialogue.txt", function(data, err) {
-		if (err === PS.FILEERROR) {
-			PS.debug("Failed to load dialogue\n");
-			return;
-		}
-		dialogue = data.split("\n");
-	});
+	fetch("dialogue.txt")
+    .then(response => {
+        if (!response.ok) throw new Error("Failed to load text");
+        return response.text();
+    })
+    .then(text => {
+        dialogue = text.split("\n").map(line => line.trim());
+    })
+    .catch(err => console.error(err));
 };
 
 function InitAudio() {
-	PS.fileLoad("audio.txt", function(data, err) {
-		if (err === PS.FILEERROR) {
-			PS.debug("failed to load audio\n");
-			return;
-		}
-		audio = data.split("\n");
-	});
+	fetch("audio.txt")
+    .then(response => {
+        if (!response.ok) throw new Error("Failed to load audio text");
+        return response.text();
+    })
+    .then(text => {
+        audio = text.split("\n").map(line => line.trim());
+    })
+    .catch(err => console.error(err));
 };

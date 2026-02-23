@@ -52,13 +52,12 @@ var BGsprite, FGsprite;
 PS.init = function(system, options) {
 	// set size of grid
 	PS.gridSize(HEIGHT, WIDTH);
-	PS.debug("version 4\n");
 
 	// no borders
 	PS.border(PS.ALL, PS.ALL, 0);
 
 	// Title
-	PS.statusText("Sunset");
+	PS.statusText("Press Space to Move On");
 
 	// Add any other initialization code you need here.
 	InitBG();
@@ -73,14 +72,14 @@ PS.init = function(system, options) {
 };
 
 PS.keyDown = function(key) {
-	if (key === PS.KEY_SPACE && skyCount < 96)
+	if (key === PS.KEY_SPACE && skyCount < 90)
 		Update();
 };
 
 function Update() {
-	if (skyCount < 96) {
+	if (skyCount < 90) {
 		// update bg
-		if (skyCount < 86)
+		if (skyCount < 84)
 			PS.spriteMove(BGsprite, 0, 14 + skyCount);
 
 		// update text + audio
@@ -90,15 +89,13 @@ function Update() {
 			PS.statusColor(0x802867);
 
 		PS.statusText(dialogue[skyCount]);
-		if (audio[skyCount] != "") {
+		if (audio[skyCount] != "") 
 			PS.audioPlay(audio[skyCount], {volume:0.5});
-			PS.audioPlay(audio[skyCount], {volume:0.5});
-			PS.audioPlay(audio[skyCount], {volume:0.5});
-		}
-		skyCount++;
 	}
 	else
 		Finish();
+
+	skyCount++;
 };
 
 function InitBG() {

@@ -42,7 +42,7 @@ If you don't use JSHint (or are using it with a configuration file), you can saf
 const HEIGHT = 32;
 const WIDTH = 31;
 
-var skyCount = 15;
+var skyCount = 14;
 var dialogue = [];
 // bg 31x97
 // fg 31x26
@@ -79,7 +79,8 @@ PS.keyDown = function(key, shift, ctrl, options) {
 function Update() {
 	// update surrounding 
 	// update bg
-	//PS.spriteMove(BGsprite, 0, skyCount++);
+	PS.spriteMove(BGsprite, 0, skyCount);
+	skyCount++;
 	// update foreground
 	// update text
 };
@@ -91,7 +92,7 @@ function InitBG() {
 
 		BGsprite = PS.spriteImage( image );
 		PS.spriteAxis(BGsprite, 0, 96);
-		PS.spriteMove(BGsprite, 0, 15);
+		PS.spriteMove(BGsprite, 0, 14);
 	};
 
 	PS.imageLoad("Sunset.bmp", onImageLoad);

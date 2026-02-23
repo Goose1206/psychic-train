@@ -63,7 +63,6 @@ PS.init = function(system, options) {
 	InitBG();
 	InitFG();
 	InitText();
-	Update();
 
 	// initialize audio
 	PS.audioLoad("fx_squirp", {lock : true});

@@ -72,14 +72,14 @@ PS.init = function(system, options) {
 };
 
 PS.keyDown = function(key) {
-	if (key === PS.KEY_SPACE && skyCount < 90)
+	if (key === PS.KEY_SPACE && skyCount < 92)
 		Update();
 };
 
 function Update() {
-	if (skyCount < 90) {
+	if (skyCount < 92) {
 		// update bg
-		if (skyCount < 84)
+		if (skyCount < 83)
 			PS.spriteMove(BGsprite, 0, 14 + skyCount);
 
 		// update text + audio

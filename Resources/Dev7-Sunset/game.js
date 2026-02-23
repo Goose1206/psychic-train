@@ -79,7 +79,7 @@ PS.keyDown = function(key, shift, ctrl, options) {
 function Update() {
 	// update surrounding 
 	// update bg
-	PS.spriteMove(BGsprite, 0, skyCount++);
+	//PS.spriteMove(BGsprite, 0, skyCount++);
 	// update foreground
 	// update text
 };
@@ -91,7 +91,7 @@ function InitBG() {
 
 		BGsprite = PS.spriteImage( image );
 		PS.spriteAxis(BGsprite, 0, 96);
-		PS.spriteMove(BGsprite, 0, HEIGHT - 1);
+		PS.spriteMove(BGsprite, 0, 15);
 	};
 
 	PS.imageLoad("Sunset.bmp", onImageLoad);

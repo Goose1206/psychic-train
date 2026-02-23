@@ -52,7 +52,7 @@ var BGsprite, FGsprite;
 PS.init = function(system, options) {
 	// set size of grid
 	PS.gridSize(HEIGHT, WIDTH);
-	PS.debug("version 3\n");
+	PS.debug("version 4\n");
 
 	// no borders
 	PS.border(PS.ALL, PS.ALL, 0);

@@ -42,8 +42,9 @@ If you don't use JSHint (or are using it with a configuration file), you can saf
 const HEIGHT = 32;
 const WIDTH = 31;
 
-var skyCount = 14;
+var skyCount = 0;
 var dialogue = [];
+var audio = [];
 // bg 31x97
 // fg 31x26
 var BGsprite, FGsprite;
@@ -51,7 +52,7 @@ var BGsprite, FGsprite;
 PS.init = function(system, options) {
 	// set size of grid
 	PS.gridSize(HEIGHT, WIDTH);
-	PS.debug("version 1");
+	PS.debug("version 2\n");
 
 	// no borders
 	PS.border(PS.ALL, PS.ALL, 0);
@@ -63,11 +64,11 @@ PS.init = function(system, options) {
 	InitBG();
 	InitFG();
 	InitText();
+	InitAudio();
 
 	// initialize audio
-	PS.audioLoad("fx_squirp", {lock : true});
-	PS.audioLoad("fx_tweet", {lock : true});
-	PS.audioLoad("fx_click", {lock : true});
+	PS.audioLoad("hchord_gb5", {lock : true});
+	PS.audioLoad("hchord_db5", {lock : true});
 
 };
 
@@ -79,10 +80,14 @@ PS.keyDown = function(key) {
 function Update() {
 	// update surrounding 
 	// update bg
-	PS.spriteMove(BGsprite, 0, skyCount);
-	skyCount++;
+	PS.spriteMove(BGsprite, 0, 14 + skyCount);
 	// update foreground
 	// update text
+	PS.statusText(dialogue[skyCount]);
+	if (audio[skyCount] != "") {
+		PS.audioPlay(audio[skyCount]);
+	}
+	skyCount++;
 };
 
 function InitBG() {
@@ -99,19 +104,35 @@ function InitBG() {
 };
 
 function InitFG() {
+	let onImageLoad = function ( image ) {
+		if ( image === PS.ERROR )
+			return;
 
-	// let onImageLoad = function ( image ) {
-	// 	if ( image === PS.ERROR )
-	// 		return;
+		FGsprite = PS.spriteImage( image );
+		PS.spriteAxis(FGsprite, 0, 25);
+		PS.spriteMove(FGsprite, 0, HEIGHT - 1);
+	};
 
-	// 	FGsprite = PS.spriteImage( image );
-	// 	PS.spriteAxis(FGsprite, 0, 25);
-	// 	PS.spriteMove( FGsprite, 0, HEIGHT - 1 );
-	// };
-
-	// PS.imageLoad("Foreground.BMP", onImageLoad);
+	PS.imageLoad("Fg.PNG", onImageLoad);
 };
 
 function InitText() {
 	// fill dialogue array
+	PS.fileLoad("dialogue.txt", function(data, err) {
+		if (err === PS.FILEERROR) {
+			PS.debug("Failed to load dialogue\n");
+			return;
+		}
+		dialogue = data.split("\n");
+	});
+};
+
+function InitAudio() {
+	PS.fileLoad("audio.txt", function(data, err) {
+		if (err === PS.FILEERROR) {
+			PS.debug("failed to load audio\n");
+			return;
+		}
+		audio = data.split("\n");
+	});
 };

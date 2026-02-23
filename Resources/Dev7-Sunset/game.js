@@ -44,6 +44,8 @@ const WIDTH = 31;
 
 var skyCount = 15;
 var dialogue = [];
+// bg 31x97
+// fg 31x26
 var BGsprite, FGsprite;
 
 PS.init = function(system, options) {
@@ -87,9 +89,9 @@ function InitBG() {
 		if ( image === PS.ERROR )
 			return;
 
-		FGsprite = PS.spriteImage( image );
-		PS.spriteAxis(FGsprite, 0, 25);
-		PS.spriteMove( FGsprite, 0, HEIGHT - 1 );
+		BGsprite = PS.spriteImage( image );
+		PS.spriteAxis(BGsprite, 0, 96);
+		PS.spriteMove(BGsprite, 0, HEIGHT - 1);
 	};
 
 	PS.imageLoad("Sunset.bmp", onImageLoad);

@@ -73,21 +73,32 @@ PS.init = function(system, options) {
 };
 
 PS.keyDown = function(key) {
-	if (key === PS.KEY_SPACE)
+	if (key === PS.KEY_SPACE && skyCount < 96)
 		Update();
 };
 
 function Update() {
-	// update surrounding 
-	// update bg
-	PS.spriteMove(BGsprite, 0, 14 + skyCount);
-	// update foreground
-	// update text
-	PS.statusText(dialogue[skyCount]);
-	if (audio[skyCount] != "") {
-		PS.audioPlay(audio[skyCount]);
+	if (skyCount < 96) {
+		// update bg
+		if (skyCount < 86)
+			PS.spriteMove(BGsprite, 0, 14 + skyCount);
+
+		// update text + audio
+		if (audio[skyCount] === "hchord_db5")
+			PS.statusColor(0x1d5f85);
+		else
+			PS.statusColor(0x802867);
+
+		PS.statusText(dialogue[skyCount]);
+		if (audio[skyCount] != "") {
+			PS.audioPlay(audio[skyCount], {volume:0.5});
+			PS.audioPlay(audio[skyCount], {volume:0.5});
+			PS.audioPlay(audio[skyCount], {volume:0.5});
+		}
+		skyCount++;
 	}
-	skyCount++;
+	else
+		Finish();
 };
 
 function InitBG() {
@@ -141,4 +152,11 @@ function InitAudio() {
         audio = text.split("\n").map(line => line.trim());
     })
     .catch(err => console.error(err));
+};
+
+function Finish() {
+	PS.statusFade();
+	PS.statusColor(0xffffff);
+	PS.spriteDelete(BGsprite);
+	PS.spriteDelete(FGsprite);
 };

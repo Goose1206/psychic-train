@@ -83,15 +83,6 @@ function Update() {
 };
 
 function InitBG() {
-	// PS.imageLoad("Sunset.bmp", function(data) {
-	// 	BGsprite = PS.spriteImage(data);
-	// } );
-
-	// PS.spriteAxis(BGsprite, 0, 97);
-};
-
-function InitFG() {
-
 	let onImageLoad = function ( image ) {
 		if ( image === PS.ERROR )
 			return;
@@ -101,7 +92,21 @@ function InitFG() {
 		PS.spriteMove( FGsprite, 0, HEIGHT - 1 );
 	};
 
-	PS.imageLoad("Foreground.BMP", onImageLoad);
+	PS.imageLoad("Sunset.bmp", onImageLoad);
+};
+
+function InitFG() {
+
+	// let onImageLoad = function ( image ) {
+	// 	if ( image === PS.ERROR )
+	// 		return;
+
+	// 	FGsprite = PS.spriteImage( image );
+	// 	PS.spriteAxis(FGsprite, 0, 25);
+	// 	PS.spriteMove( FGsprite, 0, HEIGHT - 1 );
+	// };
+
+	// PS.imageLoad("Foreground.BMP", onImageLoad);
 };
 
 function InitText() {

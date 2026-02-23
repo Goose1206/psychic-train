@@ -51,6 +51,7 @@ var BGsprite, FGsprite;
 PS.init = function(system, options) {
 	// set size of grid
 	PS.gridSize(HEIGHT, WIDTH);
+	PS.debug("version 1");
 
 	// no borders
 	PS.border(PS.ALL, PS.ALL, 0);
@@ -71,8 +72,8 @@ PS.init = function(system, options) {
 
 };
 
-PS.keyDown = function(key, shift, ctrl, options) {
-	if (key == PS.KEY_SPACE)
+PS.keyDown = function(key) {
+	if (key === PS.KEY_SPACE)
 		Update();
 };
 

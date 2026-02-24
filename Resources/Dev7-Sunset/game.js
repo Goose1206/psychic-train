@@ -74,12 +74,11 @@ PS.init = function(system, options) {
 PS.keyDown = function(key) {
 	if (key === PS.KEY_SPACE && skyCount < 93) {
 		Update();
-		PS.debug("space pressed");
 	}
 };
 
 function Update() {
-	if (skyCount < 93) {
+	if (skyCount < 92) {
 		// update bg
 		if (skyCount < 83)
 			PS.spriteMove(BGsprite, 0, 14 + skyCount);

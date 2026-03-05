@@ -68,6 +68,10 @@ PS.init = function(system, options) {
 	// initialize audio
 	PS.audioLoad("hchord_gb5", {lock : true});
 	PS.audioLoad("hchord_db5", {lock : true});
+	PS.audioLoad("fx_jump2", {lock : true});
+	PS.audioLoad("fx_jump5", {lock : true});
+	// Late Night Side of the Road Ambience by alirabiei -- https://freesound.org/s/491853/ -- License: Attribution 4.0
+	PS.audioLoad("491853__alirabiei__late-night-side-of-the-road-ambience", {autoplay : true}, {loop : true}, {path : "./"});
 
 };
 
